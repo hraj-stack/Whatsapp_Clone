@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <!-- ── Meta ───────────────────────────────────────────────────────────── -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Chat Simulator – A fictional, fully offline chat simulation app for educational purposes. Supports auto-replies, contact management, and PWA installation." />
+  <meta name="theme-color" content="#128C7E" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ChatSim" />
+
+  <!-- ── Open Graph ─────────────────────────────────────────────────────── -->
+  <meta property="og:title"       content="Chat Simulator" />
+  <meta property="og:description" content="A fictional chat simulator for educational purposes." />
+  <meta property="og:type"        content="website" />
+
+  <!-- ── PWA ───────────────────────────────────────────────────────────── -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
+
+  <!-- ── Styles ─────────────────────────────────────────────────────────── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <title>Chat Simulator</title>
+</head>
+<body>
+
+  <!-- ── App Root ───────────────────────────────────────────────────────── -->
+  <!--
+    All views are rendered dynamically inside this element by app.js.
+    The hash-based router determines which view to show.
+  -->
+  <div id="app-root" role="main" aria-label="Chat Simulator application">
+    <!-- Splash / Initial Loading State -->
+    <div class="splash-screen" id="splash" aria-hidden="true">
+      <div class="splash-logo">
+        <span class="splash-icon">💬</span>
+        <span class="splash-text">ChatSim</span>
+      </div>
+      <div class="splash-loader">
+        <div class="splash-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Inline Splash Styles (shown before CSS is parsed) ─────────────── -->
+  <style>
+    .splash-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 32px;
+      background: var(--bg-base, #F0F2F5);
+      animation: splash-fade-out 0.4s ease 1.2s forwards;
+    }
+    .splash-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .splash-icon {
+      font-size: 4rem;
+      animation: splash-pulse 1s ease-in-out infinite alternate;
+    }
+    .splash-text {
+      font-family: 'Roboto', sans-serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: #128C7E;
+      letter-spacing: .02em;
+    }
+    .splash-loader {
+      width: 120px;
+      height: 3px;
+      background: rgba(37,211,102,.2);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .splash-bar {
+      height: 100%;
+      background: var(--primary, #25D366);
+      border-radius: 9999px;
+      animation: splash-progress 1s ease-out forwards;
+    }
+    @keyframes splash-pulse {
+      from { transform: scale(1); }
+      to   { transform: scale(1.1); }
+    }
+    @keyframes splash-progress {
+      from { width: 0%; }
+      to   { width: 100%; }
+    }
+    @keyframes splash-fade-out {
+      to { opacity: 0; pointer-events: none; }
+    }
+  </style>
+
+  <!-- ── App Module ─────────────────────────────────────────────────────── -->
+  <!--
+    app.js is the entry point. It uses ES module imports for all other JS files.
+    Must be served over http:// or https:// for ES modules and IndexedDB to work.
+    Open with: npx serve . or python -m http.server 8080
+  -->
+  <script type="module" src="js/app.js"></script>
+
+  <!-- ── PWA Install Prompt ─────────────────────────────────────────────── -->
+  <script>
+    // Intercept PWA install prompt and show it after a short delay
+    let deferredInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+    });
+  </script>
+
+</body>
+</html>
