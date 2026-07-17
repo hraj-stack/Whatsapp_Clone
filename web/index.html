@@ -24,28 +24,60 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="styles.css" />
 
   <title>Chat Simulator</title>
 </head>
 <body>
 
-  <!-- ── App Root ───────────────────────────────────────────────────────── -->
-  <!--
-    All views are rendered dynamically inside this element by app.js.
-    The hash-based router determines which view to show.
-  -->
-  <div id="app-root" role="main" aria-label="Chat Simulator application">
-    <!-- Splash / Initial Loading State -->
-    <div class="splash-screen" id="splash" aria-hidden="true">
-      <div class="splash-logo">
-        <span class="splash-icon">💬</span>
-        <span class="splash-text">ChatSim</span>
-      </div>
-      <div class="splash-loader">
-        <div class="splash-bar"></div>
+  <!-- ── App Phone Shell ────────────────────────────────────────────────── -->
+  <div class="app-phone-shell">
+    <!-- ── App Root ───────────────────────────────────────────────────────── -->
+    <!--
+      All views are rendered dynamically inside this element by app.js.
+      The hash-based router determines which view to show.
+    -->
+    <div id="app-root" role="main" aria-label="Chat Simulator application">
+      <!-- Splash / Initial Loading State -->
+      <div class="splash-screen" id="splash" aria-hidden="true">
+        <div class="splash-logo">
+          <span class="splash-icon">💬</span>
+          <span class="splash-text">ChatSim</span>
+        </div>
+        <div class="splash-loader">
+          <div class="splash-bar"></div>
+        </div>
       </div>
     </div>
+
+    <!-- ── Bottom Navigation ─────────────────────────────────────────────── -->
+    <nav class="bottom-nav" aria-label="Main Navigation">
+      <a href="#/home" class="bottom-nav-item">
+        <div class="bottom-nav-icon-wrapper">
+          <span class="material-symbols-rounded">chat</span>
+        </div>
+        <span class="bottom-nav-label">Chats</span>
+      </a>
+      <a href="#/updates" class="bottom-nav-item" onclick="event.preventDefault(); document.dispatchEvent(new CustomEvent('app:toast', { detail: { msg: 'Updates coming soon!' } }));">
+        <div class="bottom-nav-icon-wrapper">
+          <span class="material-symbols-rounded">adjust</span>
+        </div>
+        <span class="bottom-nav-label">Updates</span>
+      </a>
+      <a href="#/communities" class="bottom-nav-item" onclick="event.preventDefault(); document.dispatchEvent(new CustomEvent('app:toast', { detail: { msg: 'Communities coming soon!' } }));">
+        <div class="bottom-nav-icon-wrapper">
+          <span class="material-symbols-rounded">groups</span>
+        </div>
+        <span class="bottom-nav-label">Communities</span>
+      </a>
+      <a href="#/calls" class="bottom-nav-item" onclick="event.preventDefault(); document.dispatchEvent(new CustomEvent('app:toast', { detail: { msg: 'Calls coming soon!' } }));">
+        <div class="bottom-nav-icon-wrapper">
+          <span class="material-symbols-rounded">call</span>
+        </div>
+        <span class="bottom-nav-label">Calls</span>
+      </a>
+    </nav>
   </div>
 
   <!-- ── Inline Splash Styles (shown before CSS is parsed) ─────────────── -->
@@ -120,6 +152,7 @@
       deferredInstallPrompt = e;
     });
   </script>
+
 
 </body>
 </html>

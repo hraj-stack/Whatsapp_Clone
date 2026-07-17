@@ -3,7 +3,7 @@
  * Enables full offline support for Chat Simulator.
  */
 
-const CACHE_NAME = 'chatsim-v6';
+const CACHE_NAME = 'chatsim-v9';
 const STATIC_ASSETS = [
   './',
   './index.html',

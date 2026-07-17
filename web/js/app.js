@@ -132,12 +132,17 @@ async function renderHomeView(root) {
     <div class="view home-view">
       <header class="app-header">
         <div class="app-logo">
-          <span class="logo-icon">${ICONS.chat}</span>
-          <span class="logo-text">ChatSim</span>
+          <span class="logo-text-native">WhatsApp</span>
         </div>
         <div class="header-actions">
-          <button class="btn-icon" id="settings-btn" title="Settings" aria-label="Settings">
-            ${ICONS.settings}
+          <button class="btn-icon header-action-btn" id="camera-mock-btn" title="Camera" aria-label="Camera" onclick="document.dispatchEvent(new CustomEvent('app:toast', { detail: { msg: 'Camera coming soon!' } }));">
+            <span class="material-symbols-rounded">photo_camera</span>
+          </button>
+          <button class="btn-icon header-action-btn" id="search-toggle-btn" title="Search" aria-label="Search" onclick="const wrap = document.querySelector('.search-bar-wrap'); wrap.classList.toggle('active'); if(wrap.classList.contains('active')) { document.getElementById('search-input').focus(); }">
+            <span class="material-symbols-rounded">search</span>
+          </button>
+          <button class="btn-icon header-action-btn" id="settings-btn" title="Settings" aria-label="Settings">
+            <span class="material-symbols-rounded">more_vert</span>
           </button>
         </div>
       </header>
@@ -148,6 +153,13 @@ async function renderHomeView(root) {
           <input type="text" id="search-input" placeholder="Search or start new chat"
             class="search-input" aria-label="Search contacts" />
         </div>
+      </div>
+
+      <div class="category-filters" aria-label="Filters">
+        <button class="filter-chip active" onclick="document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); this.classList.add('active');">All</button>
+        <button class="filter-chip" onclick="document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); this.classList.add('active'); document.dispatchEvent(new CustomEvent('app:toast', { detail: { msg: 'Filter: Unread (UI mock)' } }));">Unread</button>
+        <button class="filter-chip" onclick="document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); this.classList.add('active'); document.dispatchEvent(new CustomEvent('app:toast', { detail: { msg: 'Filter: Favorites (UI mock)' } }));">Favorites</button>
+        <button class="filter-chip" onclick="document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active')); this.classList.add('active'); document.dispatchEvent(new CustomEvent('app:toast', { detail: { msg: 'Filter: Groups (UI mock)' } }));">Groups</button>
       </div>
 
       <ul id="contact-list" class="contact-list" aria-label="Contact list">
